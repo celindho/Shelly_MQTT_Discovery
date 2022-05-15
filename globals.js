@@ -32,12 +32,6 @@ function getSettings() {
       },
       { name: "mqtt_port", alias: "p", type: Number, defaultValue: 1883 },
       {
-        name: "mqtt_topic_prefix",
-        alias: "t",
-        type: String,
-        defaultValue: "ruuvi",
-      },
-      {
         name: "hass_autodiscovery_disable",
         alias: "d",
         type: Boolean,
