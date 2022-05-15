@@ -7,5 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "command-line-args": "^5.2.1",
+    "data-store": "^4.0.3",
+    "mqtt": "^4.2.6",
+    "winston": "^3.3.3"
+  }
 }
