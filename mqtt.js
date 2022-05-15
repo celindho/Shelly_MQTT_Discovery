@@ -20,7 +20,7 @@ function createMqttClient(mqtt_host, mqtt_port) {
       host: mqtt_host,
       port: mqtt_port,
       connectTimeout: 60 * 1000,
-      clientId: "ruuvi2mqtt_" + Math.floor(Math.random() * 1000),
+      clientId: "shellydiscovery_" + Math.floor(Math.random() * 1000),
     });
     mqtt_client.on("connect", () => {
       logger.info("MQTT connected to. %s:%d.", mqtt_host, mqtt_port);
