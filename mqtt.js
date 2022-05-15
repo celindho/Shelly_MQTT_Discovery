@@ -49,7 +49,7 @@ function createMqttClient(mqtt_host, mqtt_port) {
     });
     mqtt_client.on("message", function (topic, payload) {
       if (listener) {
-        listener(topic, JSON.stringify(message.toString()));
+        listener(topic, JSON.parse(payload.toString()));
       } else {
         logger.warning(
           `No listener for MQTT message on ${topic}: "${payload}".`
