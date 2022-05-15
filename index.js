@@ -21,7 +21,11 @@ function mqtt_listener(topic, message) {
   } else if (topic.endsWith("announce")) {
     devices[mac].announce = message;
   }
-  if()
+  if (devices[mac].info && devices[mac].announce) {
+    logger.debug(
+      `Device ${mac} has both info and announce. Create the discovery message.`
+    );
+  }
 }
 
 mqtt.setListener(mqtt_listener);
