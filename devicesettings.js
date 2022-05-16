@@ -1,7 +1,5 @@
 const { logger, settings } = require("./globals");
 
-const removeAccents = require("remove-accents");
-
 const deviceStore = require("data-store")("shelly", {
   path: settings.config_folder + "/devices.json",
 });
