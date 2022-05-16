@@ -1,9 +1,8 @@
 function getEntities(device, deviceId) {
-  var sensors = [];
-  var entities = { sensor: sensors };
+  var entities = { sensor: [] };
 
   for (let phase = 1; phase <= 3; phase++) {
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Voltage`,
       object_id: `${deviceId}_l${phase}_voltage`,
@@ -14,7 +13,7 @@ function getEntities(device, deviceId) {
       device_class: "voltage",
       expire_after: 5 * 60,
     });
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Current`,
       object_id: `${deviceId}_l${phase}_current`,
@@ -25,7 +24,7 @@ function getEntities(device, deviceId) {
       device_class: "current",
       expire_after: 5 * 60,
     });
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Power`,
       object_id: `${deviceId}_l${phase}_power`,
@@ -36,7 +35,7 @@ function getEntities(device, deviceId) {
       device_class: "power",
       expire_after: 5 * 60,
     });
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Power Factor`,
       object_id: `${deviceId}_l${phase}_power_factor`,
@@ -47,29 +46,27 @@ function getEntities(device, deviceId) {
       device_class: "power_factor",
       expire_after: 5 * 60,
     });
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Energy`,
       object_id: `${deviceId}_l${phase}_energy`,
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/energy`,
-      state_class: "measurement",
+      state_class: "total_increasing",
       unitOfMeasurement: "Wmin",
       device_class: "energy",
-      expire_after: 5 * 60,
     });
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Returned Energy `,
       object_id: `${deviceId}_l${phase}_returned_energy`,
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_returned_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/returned_energy`,
-      state_class: "measurement",
+      state_class: "total_increasing",
       unitOfMeasurement: "Wmin",
       device_class: "energy",
-      expire_after: 5 * 60,
     });
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Power Factor`,
       object_id: `${deviceId}_l${phase}_power_factor`,
@@ -80,7 +77,7 @@ function getEntities(device, deviceId) {
       device_class: "power_factor",
       expire_after: 5 * 60,
     });
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Total Energy`,
       object_id: `${deviceId}_l${phase}_total_energy`,
@@ -89,9 +86,8 @@ function getEntities(device, deviceId) {
       state_class: "total_increasing",
       unitOfMeasurement: "kWh",
       device_class: "energy",
-      expire_after: 5 * 60,
     });
-    sensors.push({
+    entities.sensor.push({
       device: device,
       name: `${device.name} L${phase} Total Energy Returned`,
       object_id: `${deviceId}_l${phase}_total_energy_returned`,
@@ -100,7 +96,6 @@ function getEntities(device, deviceId) {
       state_class: "total_increasing",
       unitOfMeasurement: "kWh",
       device_class: "energy",
-      expire_after: 5 * 60,
     });
   }
 
