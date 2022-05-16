@@ -30,8 +30,31 @@ function getModelByMac(mac, defaultValue) {
   return getByMac(mac).model;
 }
 
+function getCustomizationByMac(mac, model) {
+  if (!deviceStore.has(`${mac}.customization`)) {
+    var defaultCustomization;
+    switch (model) {
+      case "SH4PRO":
+        defaultCustomization = { relay: {} };
+        [1, 2, 3, 4].forEach((relayIndex) => {
+          defaultCustomization.relay[relayIndex] = {
+            name: null,
+            showAsLight: false,
+          };
+        });
+        break;
+      default:
+        break;
+    }
+    deviceStore.set(`${mac}.customization`, defaultCustomization);
+    deviceStore.save();
+  }
+  return getByMac(mac).customization;
+}
+
 module.exports = {
   getNameByMac: getNameByMac,
   getAreaByMac: getAreaByMac,
   getModelByMac: getModelByMac,
+  getCustomizationByMac: getCustomizationByMac,
 };
