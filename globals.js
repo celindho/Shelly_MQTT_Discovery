@@ -1,5 +1,16 @@
 var settings;
 
+process.env["NODE_CONFIG_DIR"] = getSettings().config_folder;
+const config = require("config");
+
+function getConfigValue(property, defaultValue) {
+  if (defaultValue && !config.has(property)) {
+    return defaultValue;
+  } else {
+    return config.get(property);
+  }
+}
+
 function getLogger() {
   const winston = require("winston");
   const { splat, combine, timestamp, printf } = winston.format;
@@ -12,7 +23,7 @@ function getLogger() {
   });
 
   const logger = winston.createLogger({
-    level: "info",
+    level: getConfigValue("Logger.defaultLevel", "info"),
     format: combine(timestamp(), splat(), myFormat),
     transports: [new winston.transports.Console()],
   });
