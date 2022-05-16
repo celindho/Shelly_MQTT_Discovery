@@ -18,7 +18,7 @@ function createDiscoveryMessage(announceBody) {
       ],
       identifiers: [`Shelly ${announceBody.id}`],
       manufacturer: "Shelly",
-      model: announceBody.model,
+      model: deviceSettings.getModelByMac(mac, announceBody.model),
       name: deviceSettings.getNameByMac(mac),
       sw_version: announceBody.fw_ver,
       configuration_url: `http://${announceBody.ip}`,

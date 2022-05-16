@@ -22,7 +22,16 @@ function getAreaByMac(mac) {
   return getByMac(mac).area;
 }
 
+function getModelByMac(mac, defaultValue) {
+  if (!deviceStore.has(`${mac}.model`)) {
+    deviceStore.set(`${mac}.model`, defaultValue || null);
+    deviceStore.save();
+  }
+  return getByMac(mac).model;
+}
+
 module.exports = {
   getNameByMac: getNameByMac,
   getAreaByMac: getAreaByMac,
+  getModelByMac: getModelByMac,
 };
