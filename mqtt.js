@@ -40,7 +40,7 @@ function createMqttClient(mqtt_host, mqtt_port) {
     });
     mqtt_client.on("connect", () => {
       logger.info("MQTT connected to. %s:%d.", mqtt_host, mqtt_port);
-      subscribe("shellies/+/announce");
+      subscribe("shellies/announce");
       subscribe("shellies/+/info");
     });
     mqtt_client.on("error", (e) => {

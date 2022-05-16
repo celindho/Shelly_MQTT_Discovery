@@ -6,7 +6,7 @@ const mqtt = require("./mqtt");
 
 const deviceSettings = require("./devicesettings");
 
-function createDiscoveryMessage(announceBody, infoBody) {
+function createDiscoveryMessage(announceBody) {
   if (!settings.hass_autodiscovery_disable) {
     var mac = announceBody.mac;
 
