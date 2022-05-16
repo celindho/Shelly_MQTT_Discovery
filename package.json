@@ -4,7 +4,14 @@
   "description": "Shelly MQTT Discovery adapter",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:test": "node index.js --mqtt_host=192.168.1.173 --hass_autodiscovery_topic_prefix=homeassistant_test",
+    "start:prod": "node index.js --mqtt_host=192.168.1.173",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:local": "docker build --tag shelly_mqtt_discovery .",
+    "build:prod": "docker build -t celindho/shelly_mqtt_discovery:latest .",
+    "upload:prod": "cat docker-password.txt | docker login --username celindho --password-stdin && docker push celindho/shelly_mqtt_discovery:latest",
+    "mount:local": "docker run -d --name=shelly_mqtt_discovery-test --restart=always --env mqtt_host=192.168.1.173 --env --env hass_autodiscovery_topic_prefix=homeassistant_test -v /home/pi/shelly_discovery/.config/test:/config shelly_mqtt_discovery",
+    "unmount:local": "docker stop shelly_mqtt_discovery-test && docker rm shelly_mqtt_discovery-test"
   },
   "author": "",
   "license": "ISC",
