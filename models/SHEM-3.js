@@ -1,5 +1,6 @@
-function getSensors(device, deviceId) {
+function getEntities(device, deviceId) {
   var sensors = [];
+  var entities = { sensor: sensors };
 
   for (let phase = 1; phase <= 3; phase++) {
     sensors.push({
@@ -103,7 +104,7 @@ function getSensors(device, deviceId) {
     });
   }
 
-  return sensors;
+  return entities;
 }
 
-module.exports = getSensors;
+module.exports = getEntities;

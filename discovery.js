@@ -6,13 +6,13 @@ const mqtt = require("./mqtt");
 
 const deviceSettings = require("./devicesettings");
 
-function getSensorsByDevice(device, deviceId) {
+function getEntitiesByDevice(device, deviceId) {
   if (!device || !device.model) {
     return [];
   } else {
-    var getSensors = require("./models/" + device.model);
-    if (getSensors) {
-      return getSensors(device, deviceId);
+    var getEntities = require("./models/" + device.model);
+    if (getEntities) {
+      return getEntities(device, deviceId);
     } else {
       return [];
     }
@@ -41,12 +41,14 @@ function createDiscoveryMessage(announceBody) {
     var suggestedArea = deviceSettings.getAreaByMac(mac);
     if (suggestedArea) device.suggested_area = suggestedArea;
 
-    var sensors = getSensorsByDevice(device, deviceId);
+    var entities = getEntitiesByDevice(device, deviceId);
 
-    sensors.forEach((entity) => {
-      var discoveryTopic = `${settings.hass_autodiscovery_topic_prefix}/sensor/shelly_${entity.object_id}/config`;
-      mqtt.publishRetain(discoveryTopic, JSON.stringify(entity));
-    });
+    for (const [component, componentEntities] of Object.entries(entities)) {
+      componentEntities.forEach((entity) => {
+        var discoveryTopic = `${settings.hass_autodiscovery_topic_prefix}/${component}/shelly_${entity.object_id}/config`;
+        mqtt.publishRetain(discoveryTopic, JSON.stringify(entity));
+      });
+    }
   }
 }
 
