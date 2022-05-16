@@ -77,6 +77,30 @@ function createDiscoveryMessage(announceBody, infoBody) {
       });
       sensors.push({
         device: device,
+        name: `${device.name} L${phase} Energy`,
+        object_id: `${announceBody.id}_l${phase}_energy`,
+        unique_id: `sensor_mqtt_shelly_${mac}_l${phase}_energy`,
+        state_topic: `shellies/${announceBody.id}/emeter/${phase - 1}/energy`,
+        state_class: "measurement",
+        unitOfMeasurement: "Wmin",
+        device_class: "energy",
+        expire_after: 5 * 60,
+      });
+      sensors.push({
+        device: device,
+        name: `${device.name} L${phase} Returned Energy `,
+        object_id: `${announceBody.id}_l${phase}_returned_energy`,
+        unique_id: `sensor_mqtt_shelly_${mac}_l${phase}_returned_energy`,
+        state_topic: `shellies/${announceBody.id}/emeter/${
+          phase - 1
+        }/returned_energy`,
+        state_class: "measurement",
+        unitOfMeasurement: "Wmin",
+        device_class: "energy",
+        expire_after: 5 * 60,
+      });
+      sensors.push({
+        device: device,
         name: `${device.name} L${phase} Power Factor`,
         object_id: `${announceBody.id}_l${phase}_power_factor`,
         unique_id: `sensor_mqtt_shelly_${mac}_l${phase}_power_factor`,
