@@ -1,4 +1,4 @@
-function getEntities(device, deviceId) {
+function getEntities(device, mac, deviceId) {
   var entities = { sensor: [] };
 
   for (let phase = 1; phase <= 3; phase++) {

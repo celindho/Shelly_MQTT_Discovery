@@ -6,13 +6,13 @@ const mqtt = require("./mqtt");
 
 const deviceSettings = require("./devicesettings");
 
-function getEntitiesByDevice(device, deviceId) {
+function getEntitiesByDevice(device, mac, deviceId) {
   if (!device || !device.model) {
     return [];
   } else {
     var getEntities = require("./models/" + device.model);
     if (getEntities) {
-      return getEntities(device, deviceId);
+      return getEntities(device, mac, deviceId);
     } else {
       return [];
     }
@@ -41,7 +41,7 @@ function createDiscoveryMessage(announceBody) {
     var suggestedArea = deviceSettings.getAreaByMac(mac);
     if (suggestedArea) device.suggested_area = suggestedArea;
 
-    var entities = getEntitiesByDevice(device, deviceId);
+    var entities = getEntitiesByDevice(device, mac, deviceId);
 
     for (const [component, componentEntities] of Object.entries(entities)) {
       componentEntities.forEach((entity) => {
