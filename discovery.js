@@ -46,7 +46,10 @@ function createDiscoveryMessage(announceBody) {
     for (const [component, componentEntities] of Object.entries(entities)) {
       componentEntities.forEach((entity) => {
         var discoveryTopic = `${settings.hass_autodiscovery_topic_prefix}/${component}/shelly_${entity.object_id}/config`;
-        mqtt.publishRetain(discoveryTopic, JSON.stringify(entity));
+        mqtt.publishRetain(
+          discoveryTopic,
+          entity.nullAsMessage ? null : JSON.stringify(entity)
+        );
       });
     }
   }
