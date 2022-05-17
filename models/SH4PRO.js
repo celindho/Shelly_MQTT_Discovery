@@ -27,7 +27,7 @@ function getEntities(device, mac, deviceId) {
       device: device,
       name: `${entityName}`,
       object_id: `${escapedName}`,
-      unique_id: `sensor_mqtt_${deviceId}_relay_${output}`,
+      unique_id: `${switchOrLight}_mqtt_${deviceId}_relay_${output}`,
       state_topic: `shellies/${deviceId}/relay/${output}`,
       command_topic: `shellies/${deviceId}/relay/${output}/command`,
       payload_on: "on",
@@ -35,7 +35,7 @@ function getEntities(device, mac, deviceId) {
     });
     entities[switchOrLightToClear].push({
       nullAsMessage: true,
-      object_id: `${deviceId}_relay_${output}`,
+      unique_id: `${switchOrLightToClear}_mqtt_${deviceId}_relay_${output}`,
     });
     entities.sensor.push({
       device: device,
