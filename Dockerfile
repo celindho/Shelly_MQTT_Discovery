@@ -12,6 +12,7 @@ COPY package-lock.json package-lock.json
 RUN npm install
 
 COPY *.js ./
+COPY models/*.js ./models/
 
 ENV config_folder="/config"
 
