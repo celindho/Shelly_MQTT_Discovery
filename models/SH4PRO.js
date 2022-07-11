@@ -44,7 +44,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_relay_${output}_power`,
       state_topic: `shellies/${deviceId}/relay/${output}/power`,
       state_class: "measurement",
-      unitOfMeasurement: "W",
+      unit_of_measurement: "W",
       device_class: "power",
       expire_after: 5 * 60,
     });
@@ -55,7 +55,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_relay_${output}_energy`,
       state_topic: `shellies/${deviceId}/relay/${output}/energy`,
       state_class: "total_increasing",
-      unitOfMeasurement: "Wmin",
+      unit_of_measurement: "Wmin",
       device_class: "energy",
     });
   }

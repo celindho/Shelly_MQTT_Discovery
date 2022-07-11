@@ -20,7 +20,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_voltage`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/voltage`,
       state_class: "measurement",
-      unitOfMeasurement: "V",
+      unit_of_measurement: "V",
       device_class: "voltage",
       expire_after: 5 * 60,
     });
@@ -31,7 +31,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_current`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/current`,
       state_class: "measurement",
-      unitOfMeasurement: "A",
+      unit_of_measurement: "A",
       device_class: "current",
       expire_after: 5 * 60,
     });
@@ -42,7 +42,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_power`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/power`,
       state_class: "measurement",
-      unitOfMeasurement: "W",
+      unit_of_measurement: "W",
       device_class: "power",
       expire_after: 5 * 60,
     });
@@ -53,7 +53,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_power_factor`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/power_factor`,
       state_class: "measurement",
-      unitOfMeasurement: "%",
+      unit_of_measurement: "%",
       device_class: "power_factor",
       expire_after: 5 * 60,
     });
@@ -64,7 +64,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/energy`,
       state_class: "total_increasing",
-      unitOfMeasurement: "Wmin",
+      unit_of_measurement: "Wmin",
       device_class: "energy",
     });
     entities.sensor.push({
@@ -74,7 +74,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_returned_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/returned_energy`,
       state_class: "total_increasing",
-      unitOfMeasurement: "Wmin",
+      unit_of_measurement: "Wmin",
       device_class: "energy",
     });
     entities.sensor.push({
@@ -84,7 +84,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_power_factor`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/pf`,
       state_class: "measurement",
-      unitOfMeasurement: "%",
+      unit_of_measurement: "%",
       device_class: "power_factor",
       expire_after: 5 * 60,
     });
@@ -95,7 +95,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_total_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/total`,
       state_class: "total_increasing",
-      unitOfMeasurement: "kWh",
+      unit_of_measurement: "kWh",
       device_class: "energy",
     });
     entities.sensor.push({
@@ -105,7 +105,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_total_energy_returned`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/total_returned`,
       state_class: "total_increasing",
-      unitOfMeasurement: "kWh",
+      unit_of_measurement: "kWh",
       device_class: "energy",
     });
   }
