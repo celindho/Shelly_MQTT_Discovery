@@ -64,7 +64,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/energy`,
       state_class: "total_increasing",
-      value_template: "{{ value / 60 }}",
+      value_template: "{{ ( (value | float) / 60) | round(2, 'floor') }}",
       unit_of_measurement: "Wh",
       device_class: "energy",
     });
@@ -75,7 +75,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_returned_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/returned_energy`,
       state_class: "total_increasing",
-      value_template: "{{ value / 60 }}",
+      value_template: "{{ ( (value | float) / 60) | round(2, 'floor') }}",
       unit_of_measurement: "Wh",
       device_class: "energy",
     });

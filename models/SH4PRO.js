@@ -55,7 +55,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_relay_${output}_energy`,
       state_topic: `shellies/${deviceId}/relay/${output}/energy`,
       state_class: "total_increasing",
-      value_template: "{{ value / 60 }}",
+      value_template: "{{ ( (value | float) / 60) | round(2, 'floor') }}",
       unit_of_measurement: "Wh",
       device_class: "energy",
     });
