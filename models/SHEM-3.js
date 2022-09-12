@@ -97,7 +97,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_total_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/total`,
       state_class: "total_increasing",
-      unit_of_measurement: "kWh",
+      unit_of_measurement: "Wh",
       device_class: "energy",
     });
     entities.sensor.push({
@@ -107,7 +107,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_total_energy_returned`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/total_returned`,
       state_class: "total_increasing",
-      unit_of_measurement: "kWh",
+      unit_of_measurement: "Wh",
       device_class: "energy",
     });
   }
