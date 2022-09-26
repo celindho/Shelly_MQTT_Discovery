@@ -3,7 +3,7 @@ const removeAccents = require("remove-accents");
 function getEscapedString(string) {
   return removeAccents(string)
     .toLowerCase()
-    .replace(/[^a-z ]/g, "")
+    .replace(/[^a-z0-9 ]/g, "")
     .replace(/ +/g, "_");
 }
 
