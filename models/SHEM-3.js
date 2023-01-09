@@ -48,22 +48,10 @@ function getEntities(device, mac, deviceId) {
     });
     entities.sensor.push({
       device: device,
-      name: `${device.name} L${phase} Power Factor`,
-      object_id: `${escapedDeviceName}_l${phase}_power_factor`,
-      unique_id: `sensor_mqtt_${deviceId}_l${phase}_power_factor`,
-      state_topic: `shellies/${deviceId}/emeter/${phase - 1}/power_factor`,
-      state_class: "measurement",
-      unit_of_measurement: "%",
-      device_class: "power_factor",
-      expire_after: 5 * 60,
-    });
-    entities.sensor.push({
-      device: device,
       name: `${device.name} L${phase} Energy`,
       object_id: `${escapedDeviceName}_l${phase}_energy`,
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/energy`,
-      state_class: "total_increasing",
       value_template: "{{ ( (value | float) / 60) | round(2, 'floor') }}",
       unit_of_measurement: "Wh",
       device_class: "energy",
@@ -74,7 +62,6 @@ function getEntities(device, mac, deviceId) {
       object_id: `${escapedDeviceName}_l${phase}_returned_energy`,
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_returned_energy`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/returned_energy`,
-      state_class: "total_increasing",
       value_template: "{{ ( (value | float) / 60) | round(2, 'floor') }}",
       unit_of_measurement: "Wh",
       device_class: "energy",
@@ -86,7 +73,7 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_power_factor`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/pf`,
       state_class: "measurement",
-      unit_of_measurement: "%",
+      unit_of_measurement: "",
       device_class: "power_factor",
       expire_after: 5 * 60,
     });
