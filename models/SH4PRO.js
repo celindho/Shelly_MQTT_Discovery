@@ -32,6 +32,7 @@ function getEntities(device, mac, deviceId) {
       command_topic: `shellies/${deviceId}/relay/${output}/command`,
       payload_on: "on",
       payload_off: "off",
+      expire_after: 5 * 60,
     });
     entities[switchOrLightToClear].push({
       nullAsMessage: true,
