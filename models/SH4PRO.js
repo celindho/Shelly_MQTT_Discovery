@@ -59,6 +59,7 @@ function getEntities(device, mac, deviceId) {
       value_template: "{{ ( (value | float) / 60) | round(2, 'floor') }}",
       unit_of_measurement: "Wh",
       device_class: "energy",
+      expire_after: 5 * 60,
     });
   }
 
