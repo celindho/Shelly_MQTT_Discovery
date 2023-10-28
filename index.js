@@ -17,6 +17,7 @@ function mqtt_listener(topic, message) {
   }
   if (topic.endsWith("info")) {
     var id = devices[mac];
+    //sendDiagnostics(id, message);
   }
 }
 
