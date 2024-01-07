@@ -11,7 +11,7 @@
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/index.js",
       "args": [
-        "--mqtt_host=192.168.1.173",
+        "--mqtt_host=192.168.1.103",
         "--hass_autodiscovery_topic_prefix=homeassistant_test"
       ]
     }
