@@ -54,8 +54,17 @@ function createDiscoveryMessage(announceBody) {
     var entities = getEntitiesByDevice(device, mac, deviceId);
 
     for (const [component, componentEntities] of Object.entries(entities)) {
+      logger.debug(
+        `${deviceId}.${component}: ${componentEntities.length} entities`
+      );
       componentEntities.forEach((entity) => {
         var discoveryTopic = `${settings.hass_autodiscovery_topic_prefix}/${component}/${entity.unique_id}/config`;
+
+        logger.debug(
+          `Created  discovery topic '${discoveryTopic}' with message '${JSON.stringify(
+            entity
+          )}'`
+        );
         mqtt.publishRetain(
           discoveryTopic,
           entity.nullAsMessage ? null : JSON.stringify(entity)
