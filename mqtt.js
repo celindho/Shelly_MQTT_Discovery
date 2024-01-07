@@ -12,6 +12,11 @@ function setListener(new_listener) {
 }
 
 function publish(topic, message, options) {
+  logger.debug(
+    `Publish on ${topic} ${options?.retain ? "[R]" : ""}: ${JSON.stringify(
+      message
+    )}`
+  );
   mqtt_client.publish(topic, message, options);
 }
 

@@ -7,13 +7,23 @@ const mqtt = require("./mqtt");
 const deviceSettings = require("./devicesettings");
 
 function getEntitiesByDevice(device, mac, deviceId) {
+  logger.debug(`Getting entities for '${deviceId}'`);
   if (!device || !device.model) {
+    logger.debug(`No device defined for '${deviceId}'`);
     return [];
   } else {
+    logger.debug(`Getting definitions for model ${device.model}'`);
     var getEntities = require("./models/" + device.model);
     if (getEntities) {
-      return getEntities(device, mac, deviceId);
+      var entities = getEntities(device, mac, deviceId);
+      logger.debug(
+        `${entities.sensor?.length || 0} sensors, ${
+          entities.light?.length || 0
+        } ligths and ${entities.switch?.length || 0} switches for '${deviceId}'`
+      );
+      return entities;
     } else {
+      logger.debug(`No model definition for '${device.model}'`);
       return [];
     }
   }
