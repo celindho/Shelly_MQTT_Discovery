@@ -73,7 +73,6 @@ function getEntities(device, mac, deviceId) {
       unique_id: `sensor_mqtt_${deviceId}_l${phase}_power_factor`,
       state_topic: `shellies/${deviceId}/emeter/${phase - 1}/pf`,
       state_class: "measurement",
-      unit_of_measurement: "",
       device_class: "power_factor",
       expire_after: 5 * 60,
     });
