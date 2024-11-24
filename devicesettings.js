@@ -6,7 +6,7 @@ const deviceStore = require("data-store")("shelly", {
 
 function getByMac(mac) {
   if (!deviceStore.has(mac)) {
-    deviceStore.set(mac, { name: null, area: null });
+    deviceStore.set(mac, { name: null, area: null, enabled: false });
     deviceStore.save();
   }
   return deviceStore.get(mac);
@@ -14,6 +14,11 @@ function getByMac(mac) {
 
 function getNameByMac(mac) {
   return getByMac(mac).name || `Shelly ${mac}`;
+}
+
+function getIsEnabled(mac) {
+  var isEnabled = getByMac(mac).enabled
+  return enabled == undefined ? true: isEnabled;
 }
 
 function getAreaByMac(mac) {
@@ -52,6 +57,7 @@ function getCustomizationByMac(mac, model) {
 
 module.exports = {
   getNameByMac: getNameByMac,
+  getIsEnabled: getIsEnabled,
   getAreaByMac: getAreaByMac,
   getModelByMac: getModelByMac,
   getCustomizationByMac: getCustomizationByMac,

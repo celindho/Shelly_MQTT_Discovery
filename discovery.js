@@ -17,8 +17,7 @@ function getEntitiesByDevice(device, mac, deviceId) {
     if (getEntities) {
       var entities = getEntities(device, mac, deviceId);
       logger.debug(
-        `${entities.sensor?.length || 0} sensors, ${
-          entities.light?.length || 0
+        `${entities.sensor?.length || 0} sensors, ${entities.light?.length || 0
         } ligths and ${entities.switch?.length || 0} switches for '${deviceId}'`
       );
       return entities;
@@ -34,42 +33,45 @@ function createDiscoveryMessage(announceBody) {
     var mac = announceBody.mac;
     var deviceId = announceBody.id;
 
-    const device = {
-      connections: [
-        ["mqtt", `shellies/${deviceId}/`],
-        ["ip", announceBody.ip],
-        ["mac", mac],
-      ],
-      identifiers: [`Shelly ${deviceId}`],
-      manufacturer: "Shelly",
-      model: deviceSettings.getModelByMac(mac, announceBody.model),
-      name: deviceSettings.getNameByMac(mac),
-      sw_version: announceBody.fw_ver,
-      configuration_url: `http://${announceBody.ip}`,
-    };
+    if (deviceSettings.getIsEnabled(mac)) {
 
-    var suggestedArea = deviceSettings.getAreaByMac(mac);
-    if (suggestedArea) device.suggested_area = suggestedArea;
+      const device = {
+        connections: [
+          ["mqtt", `shellies/${deviceId}/`],
+          ["ip", announceBody.ip],
+          ["mac", mac],
+        ],
+        identifiers: [`Shelly ${deviceId}`],
+        manufacturer: "Shelly",
+        model: deviceSettings.getModelByMac(mac, announceBody.model),
+        name: deviceSettings.getNameByMac(mac),
+        sw_version: announceBody.fw_ver,
+        configuration_url: `http://${announceBody.ip}`,
+      };
 
-    var entities = getEntitiesByDevice(device, mac, deviceId);
+      var suggestedArea = deviceSettings.getAreaByMac(mac);
+      if (suggestedArea) device.suggested_area = suggestedArea;
 
-    for (const [component, componentEntities] of Object.entries(entities)) {
-      logger.debug(
-        `${deviceId}.${component}: ${componentEntities.length} entities`
-      );
-      componentEntities.forEach((entity) => {
-        var discoveryTopic = `${settings.hass_autodiscovery_topic_prefix}/${component}/${entity.unique_id}/config`;
+      var entities = getEntitiesByDevice(device, mac, deviceId);
 
+      for (const [component, componentEntities] of Object.entries(entities)) {
         logger.debug(
-          `Created  discovery topic '${discoveryTopic}' with message '${JSON.stringify(
-            entity
-          )}'`
+          `${deviceId}.${component}: ${componentEntities.length} entities`
         );
-        mqtt.publishRetain(
-          discoveryTopic,
-          entity.nullAsMessage ? null : JSON.stringify(entity)
-        );
-      });
+        componentEntities.forEach((entity) => {
+          var discoveryTopic = `${settings.hass_autodiscovery_topic_prefix}/${component}/${entity.unique_id}/config`;
+
+          logger.debug(
+            `Created  discovery topic '${discoveryTopic}' with message '${JSON.stringify(
+              entity
+            )}'`
+          );
+          mqtt.publishRetain(
+            discoveryTopic,
+            entity.nullAsMessage ? null : JSON.stringify(entity)
+          );
+        });
+      }
     }
   }
 }
