@@ -6,7 +6,12 @@ const deviceStore = require("data-store")("shelly", {
 
 function getByMac(mac) {
   if (!deviceStore.has(mac)) {
-    deviceStore.set(mac, { name: null, area: null, enabled: false });
+    deviceStore.set(mac, {
+      name: null,
+      model: null,
+      area: null,
+      enabled: false,
+    });
     deviceStore.save();
   }
   return deviceStore.get(mac);
