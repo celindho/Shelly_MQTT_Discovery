@@ -21,7 +21,7 @@ function publish(topic, message, options) {
 }
 
 function publishRetain(topic, message) {
-  mqtt_client.publish(topic, message, { retain: true });
+  publish(topic, message, { retain: true });
 }
 
 function subscribe(topic) {
