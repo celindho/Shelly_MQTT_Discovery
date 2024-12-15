@@ -17,8 +17,8 @@ function getNameByMac(mac) {
 }
 
 function getIsEnabled(mac) {
-  var isEnabled = getByMac(mac).enabled
-  return enabled == undefined ? true: isEnabled;
+  var isEnabled = getByMac(mac).enabled;
+  return undefined ? true : isEnabled;
 }
 
 function getAreaByMac(mac) {
